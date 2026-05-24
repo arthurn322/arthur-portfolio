@@ -1,0 +1,5 @@
+# Files in dist/ that should NOT be served as static assets by the Cloudflare Worker.
+# Empty = serve everything in dist/ as static. Required by Cloudflare's Wrangler
+# deploy step when "astro add cloudflare" runs during build.
+_worker.js
+_routes.json
