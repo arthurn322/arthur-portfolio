@@ -1,0 +1,138 @@
+---
+import { Image } from 'astro:assets';
+import Sheet from '../layouts/Sheet.astro';
+import { sheets } from '../data/sheets';
+
+const name = "Arthur Nguyen";
+const projectNumber = "AN-001";
+
+// Auto-discover photos in src/assets/gallery/.
+// Sort descending by filepath so newest (IMG_20260524_…) appears first.
+const galleryImports = import.meta.glob('../assets/gallery/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}', { eager: true });
+
+const photos = Object.entries(galleryImports)
+  .sort(([a], [b]) => b.localeCompare(a))
+  .map(([path, mod]: [string, any]) => ({
+    src: mod.default,
+    filename: path.split('/').pop()?.replace(/\.[^.]+$/, '') ?? '',
+  }));
+
+const g01 = sheets.find((s) => s.num === 'G-01')!;
+---
+
+<Sheet title={`${name} — Gallery`}>
+
+  <section id="g-01" class="sheet min-h-screen flex flex-col py-10 md:py-12 reveal relative">
+
+    <header class="bubble-row">
+      <span class="bubble">{g01.num}</span>
+      <span class="bubble-line"></span>
+      <span class="bubble-label">{g01.title.toUpperCase()}</span>
+    </header>
+
+    <div class="dim-label-block mt-12 mb-2">
+      <span class="dim-tick"></span>
+      <span class="dim-text">— Most recent first —</span>
+      <span class="dim-tick"></span>
+    </div>
+
+    {photos.length === 0 ? (
+      <div class="empty-gallery">
+        <p class="font-serif italic text-lg md:text-xl text-ink/75">
+          No photographs filed yet.
+        </p>
+        <p class="empty-hint">
+          Drop images into <code>src/assets/gallery/</code> — they auto-appear here, newest first. Phone defaults (IMG_…) work fine.
+        </p>
+      </div>
+    ) : (
+      <ul class="gallery-grid">
+        {photos.map((p, i) => (
+          <li class="gallery-item">
+            <span class="gallery-bubble">G-01.{String(i + 1).padStart(2, '0')}</span>
+            <div class="frame">
+              <Image
+                src={p.src}
+                alt={p.filename}
+                widths={[400, 800, 1200]}
+                sizes="(min-width: 768px) 45vw, 100vw"
+                class="w-full h-auto object-cover"
+                loading="lazy"
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <div class="end-of-set">
+      <div class="eos-rule"></div>
+      <span>END OF SET</span>
+      <div class="eos-rule"></div>
+    </div>
+
+    <p class="copy-line">
+      © {new Date().getFullYear()} {name} &nbsp;·&nbsp; {projectNumber}
+    </p>
+  </section>
+
+</Sheet>
+
+<style is:global>
+  .gallery-grid {
+    list-style: none;
+    padding: 0;
+    margin: 36px 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px 40px;
+    }
+  }
+
+  .gallery-item {
+    position: relative;
+    padding-top: 24px;
+  }
+
+  .gallery-bubble {
+    position: absolute;
+    top: -2px;
+    left: 8px;
+    padding: 4px 10px;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    z-index: 2;
+  }
+
+  .empty-gallery {
+    margin: 80px auto;
+    max-width: 540px;
+    text-align: center;
+  }
+  .empty-hint {
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .empty-hint code {
+    background: rgba(200, 168, 120, 0.18);
+    padding: 2px 6px;
+    border: 1px dashed var(--rule);
+    text-transform: none;
+    letter-spacing: 0.03em;
+    font-size: 0.95em;
+  }
+</style>
