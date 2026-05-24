@@ -1,0 +1,676 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '../assets/arthur-hero.jpg';
+
+const name = "Arthur Nguyen";
+const tagline = "Bringing AI tools to traditional manufacturing.";
+const role = "VP of Projects & Operations, Volume Millwork";
+const email = "ArthurOnSite@outlook.com";
+const projectNumber = "AN-2026-01";
+const issueDate = new Date()
+  .toLocaleDateString("en-US", { year: "numeric", month: "short", day: "2-digit" })
+  .toUpperCase();
+
+const sheets = [
+  { num: "T-01", title: "Title Sheet" },
+  { num: "A-01", title: "About" },
+  { num: "C-01", title: "Contact" },
+];
+
+const gridColumns = ["A", "B", "C", "D", "E", "F"];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>{name} — Portfolio</title>
+  </head>
+
+  <body class="bg-bone text-ink font-sans antialiased paper">
+    <!-- DRAWING SHEET — thick outer border + thin inner border like a real drawing sheet -->
+    <div class="drawing-sheet">
+
+      <!-- Crop marks at the four corners of the sheet -->
+      <span class="crop crop-tl" aria-hidden="true"></span>
+      <span class="crop crop-tr" aria-hidden="true"></span>
+      <span class="crop crop-bl" aria-hidden="true"></span>
+      <span class="crop crop-br" aria-hidden="true"></span>
+
+      <!-- Column grid letters across the top margin -->
+      <div class="col-grid" aria-hidden="true">
+        {gridColumns.map((c) => <span>{c}</span>)}
+      </div>
+
+      <main class="mx-auto max-w-5xl px-6 md:px-12 relative">
+
+        {/* ───────── SHEET T-01 — TITLE ───────── */}
+        <section class="sheet min-h-screen flex flex-col py-10 md:py-12 reveal relative">
+
+          <!-- North arrow, top right -->
+          <svg class="north-arrow" viewBox="0 0 60 60" aria-hidden="true">
+            <circle cx="30" cy="30" r="28" fill="none" stroke="#8a6a44" stroke-width="0.6"/>
+            <path d="M30 6 L36 36 L30 30 L24 36 Z" fill="#2a2520"/>
+            <path d="M30 30 L36 36 L30 54 L24 36 Z" fill="none" stroke="#2a2520" stroke-width="0.6"/>
+            <text x="30" y="20" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#2a2520">N</text>
+          </svg>
+
+          <!-- Detail bubble + section name header -->
+          <header class="bubble-row">
+            <span class="bubble">{sheets[0].num}</span>
+            <span class="bubble-line"></span>
+            <span class="bubble-label">{sheets[0].title.toUpperCase()}</span>
+            <span class="rev-triangle" title="Revision 1">
+              <svg viewBox="0 0 16 16"><polygon points="8,1 15,14 1,14" fill="none" stroke="#8a6a44" stroke-width="1"/><text x="8" y="13" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#8a6a44">1</text></svg>
+            </span>
+          </header>
+
+          <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center flex-1 py-10 md:py-16">
+            <div class="order-2 md:order-1 relative">
+              <span class="margin-note">Houston, TX</span>
+              <h1 class="font-serif text-6xl md:text-7xl tracking-tight leading-none mb-6">
+                {name}
+              </h1>
+              <p class="text-lg md:text-xl text-ink/85 max-w-lg leading-relaxed mb-6">
+                {tagline}
+              </p>
+              <p class="text-xs uppercase tracking-[0.25em] text-muted">
+                {role}
+              </p>
+            </div>
+
+            <!-- Photo with dimension lines on two sides -->
+            <div class="order-1 md:order-2 dim-wrap">
+              <div class="frame">
+                <Image
+                  src={heroImage}
+                  alt="Arthur Nguyen reviewing construction drawings on-site"
+                  widths={[400, 800, 1200]}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  class="w-full h-auto object-cover aspect-[3/4]"
+                />
+              </div>
+              <span class="dim dim-right"><span class="dim-label">24"</span></span>
+              <span class="dim dim-bottom"><span class="dim-label">18"</span></span>
+            </div>
+          </div>
+
+          <!-- TITLE BLOCK — bottom-right, gridded, like the real thing -->
+          <div class="title-block">
+            <div class="tb-cell tb-wide">
+              <div class="tb-key">Project</div>
+              <div class="tb-val">Arthur Nguyen — Portfolio</div>
+            </div>
+            <div class="tb-cell">
+              <div class="tb-key">Drawn</div>
+              <div class="tb-val">A. NGUYEN</div>
+            </div>
+            <div class="tb-cell">
+              <div class="tb-key">Date</div>
+              <div class="tb-val">{issueDate}</div>
+            </div>
+            <div class="tb-cell">
+              <div class="tb-key">Scale</div>
+              <div class="tb-val">NTS</div>
+            </div>
+            <div class="tb-cell">
+              <div class="tb-key">Proj No.</div>
+              <div class="tb-val">{projectNumber}</div>
+            </div>
+            <div class="tb-cell tb-sheet">
+              <div class="tb-key">Sheet</div>
+              <div class="tb-val tb-sheet-num">{sheets[0].num}</div>
+            </div>
+          </div>
+
+          <!-- Scale bar -->
+          <div class="scale-bar" aria-hidden="true">
+            <div class="scale-graphic">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="scale-label">0&nbsp;&nbsp;&nbsp;1'&nbsp;&nbsp;&nbsp;2'&nbsp;&nbsp;&nbsp;3'&nbsp;&nbsp;&nbsp;4'</div>
+          </div>
+        </section>
+
+        <!-- MATCH LINE — between T-01 and A-01 -->
+        <div class="match-line" aria-hidden="true">
+          <span class="match-tag">MATCH LINE — SEE SHEET {sheets[1].num}</span>
+        </div>
+
+        {/* ───────── SHEET A-01 — ABOUT ───────── */}
+        <section class="sheet py-16 md:py-24 reveal relative">
+          <header class="bubble-row">
+            <span class="bubble">{sheets[1].num}</span>
+            <span class="bubble-line"></span>
+            <span class="bubble-label">{sheets[1].title.toUpperCase()}</span>
+          </header>
+
+          <div class="grid md:grid-cols-12 gap-8 mt-12">
+            <aside class="md:col-span-3">
+              <div class="dim-label-block">
+                <span class="dim-tick"></span>
+                <span class="dim-text">— Background</span>
+                <span class="dim-tick"></span>
+              </div>
+              <p class="hand-note">
+                Architectural millwork. Construction.
+                Manufacturing. Project management.
+                Sales. Operational growth.
+              </p>
+            </aside>
+
+            <div class="md:col-span-9 max-w-2xl space-y-6 text-base md:text-lg leading-[1.85] text-ink/85">
+              <p>
+                VP of Projects & Operations with a strong background in
+                architectural millwork, construction, manufacturing, project
+                management, sales, and operational growth. Currently serving at
+                Volume Millwork, where I focus on improving processes, supporting
+                teams, strengthening client relationships, and helping scale the
+                business with purpose, structure, and consistency.
+              </p>
+              <p>
+                I'm passionate about construction, craftsmanship, and building
+                strong relationships with people who care about doing quality
+                work. I enjoy connecting with owners, builders, designers,
+                vendors, and industry professionals who share that same drive.
+                All you have to do is ask; I will help you if I can.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- MATCH LINE — between A-01 and C-01 -->
+        <div class="match-line" aria-hidden="true">
+          <span class="match-tag">MATCH LINE — SEE SHEET {sheets[2].num}</span>
+        </div>
+
+        {/* ───────── SHEET C-01 — CONTACT ───────── */}
+        <section class="sheet py-16 md:py-24 reveal relative">
+          <header class="bubble-row">
+            <span class="bubble">{sheets[2].num}</span>
+            <span class="bubble-line"></span>
+            <span class="bubble-label">{sheets[2].title.toUpperCase()}</span>
+          </header>
+
+          <div class="mt-16 max-w-2xl">
+            <div class="dim-label-block mb-6">
+              <span class="dim-tick"></span>
+              <span class="dim-text">— Direct line</span>
+              <span class="dim-tick"></span>
+            </div>
+
+            <!-- Email link with revision cloud accent -->
+            <div class="rev-wrap">
+              <a
+                href={`mailto:${email}`}
+                class="inline-block font-serif text-3xl md:text-5xl text-ink hover:text-oakDark transition-colors duration-300 border-b border-oak/40 hover:border-oakDark pb-2"
+              >
+                {email}
+              </a>
+              <span class="rev-cloud-num">1</span>
+            </div>
+
+            <p class="mt-12 font-serif italic text-base text-ink/70 max-w-md">
+              "All you have to do is ask; I will help you if I can."
+            </p>
+          </div>
+
+          <div class="end-of-set">
+            <div class="eos-rule"></div>
+            <span>END OF SET</span>
+            <div class="eos-rule"></div>
+          </div>
+
+          <p class="copy-line">
+            © {new Date().getFullYear()} {name} &nbsp;·&nbsp; {projectNumber}
+          </p>
+        </section>
+
+      </main>
+    </div>
+
+    <style is:global>
+      :root {
+        --paper: #f6f1e8;
+        --linen: #ede4d3;
+        --rule: #cdb98f;
+        --rule-soft: #e3d6bd;
+        --oak: #c8a878;
+        --oak-dark: #8a6a44;
+        --ink: #2a2520;
+        --muted: #6b6259;
+      }
+
+      /* ── PAPER + BLUEPRINT GRID ────────────────────────────────
+         Two layered backgrounds: faint orthogonal grid (drafting paper)
+         + the warm noise (printed-on-paper feel). */
+      .paper {
+        background-color: var(--paper);
+        background-image:
+          linear-gradient(to right, rgba(138,106,68,0.07) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(138,106,68,0.07) 1px, transparent 1px),
+          url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.45  0 0 0 0 0.30  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+        background-size: 32px 32px, 32px 32px, 300px 300px;
+      }
+
+      /* ── DRAWING SHEET BORDER ─────────────────────────────────
+         Thick outer line + thin inner line, with breathing room. */
+      .drawing-sheet {
+        position: relative;
+        margin: 18px;
+        border: 2px solid var(--ink);
+        outline: 1px solid var(--ink);
+        outline-offset: 6px;
+        min-height: calc(100vh - 36px);
+      }
+
+      /* Crop marks at the four corners */
+      .crop {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        pointer-events: none;
+      }
+      .crop::before, .crop::after {
+        content: "";
+        position: absolute;
+        background: var(--ink);
+      }
+      .crop::before { width: 18px; height: 1px; top: 50%; left: 0; }
+      .crop::after { width: 1px; height: 18px; top: 0; left: 50%; }
+      .crop-tl { top: -28px; left: -28px; }
+      .crop-tr { top: -28px; right: -28px; }
+      .crop-bl { bottom: -28px; left: -28px; }
+      .crop-br { bottom: -28px; right: -28px; }
+
+      /* ── COLUMN GRID LETTERS (A B C D E F across the top) ───── */
+      .col-grid {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 4%;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        color: var(--oak-dark);
+        border-bottom: 1px solid var(--rule);
+        background:
+          repeating-linear-gradient(
+            to right,
+            transparent 0,
+            transparent calc(20% - 1px),
+            var(--rule) calc(20% - 1px),
+            var(--rule) 20%
+          );
+        background-size: 100% 100%;
+      }
+      .col-grid span {
+        background: var(--paper);
+        padding: 0 8px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── NORTH ARROW ──────────────────────────────────────────── */
+      .north-arrow {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 56px;
+        height: 56px;
+        opacity: 0.85;
+      }
+      @media (min-width: 768px) {
+        .north-arrow { width: 64px; height: 64px; top: 20px; right: 24px; }
+      }
+
+      /* ── DETAIL BUBBLE + SECTION HEADER ────────────────────────
+         Circle with section number, a leader line, then the section
+         name in hand-drafted italics — like a callout on a drawing. */
+      .bubble-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-top: 8px;
+      }
+      .bubble {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        border: 1.5px solid var(--ink);
+        border-radius: 50%;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        background: var(--paper);
+        color: var(--ink);
+        flex-shrink: 0;
+      }
+      .bubble-line {
+        flex: 1;
+        height: 1px;
+        background: var(--ink);
+        max-width: 80px;
+      }
+      .bubble-label {
+        font-family: 'Architects Daughter', cursive;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+        color: var(--ink);
+      }
+      .rev-triangle {
+        margin-left: auto;
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+      }
+      .rev-triangle svg { width: 100%; height: 100%; display: block; }
+
+      /* ── MARGIN NOTE (hand-redline) ─────────────────────────── */
+      .margin-note {
+        position: absolute;
+        top: -2.5rem;
+        left: 0;
+        font-family: 'Architects Daughter', cursive;
+        font-size: 1rem;
+        color: var(--oak-dark);
+        letter-spacing: 0.02em;
+      }
+      .margin-note::before { content: "→ "; opacity: 0.6; }
+
+      /* ── HERO PHOTO FRAME + DIMENSION LINES ───────────────────── */
+      .dim-wrap { position: relative; padding: 28px 36px 36px 0; }
+      .frame {
+        padding: 6px;
+        border: 1px solid var(--ink);
+        outline: 1px solid var(--ink);
+        outline-offset: 4px;
+        background: var(--paper);
+      }
+      .dim {
+        position: absolute;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.65rem;
+        color: var(--oak-dark);
+        letter-spacing: 0.1em;
+      }
+      /* right-side vertical dimension */
+      .dim-right {
+        top: 28px;
+        bottom: 36px;
+        right: 8px;
+        width: 18px;
+        border-right: 1px solid var(--oak-dark);
+      }
+      .dim-right::before, .dim-right::after {
+        content: "";
+        position: absolute;
+        right: -4px;
+        width: 8px;
+        height: 1px;
+        background: var(--oak-dark);
+      }
+      .dim-right::before { top: 0; }
+      .dim-right::after { bottom: 0; }
+      .dim-right .dim-label {
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        transform-origin: right center;
+        background: var(--paper);
+        padding: 0 4px;
+        white-space: nowrap;
+      }
+      /* bottom horizontal dimension */
+      .dim-bottom {
+        left: 0;
+        right: 36px;
+        bottom: 8px;
+        height: 18px;
+        border-bottom: 1px solid var(--oak-dark);
+      }
+      .dim-bottom::before, .dim-bottom::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        width: 1px;
+        height: 8px;
+        background: var(--oak-dark);
+      }
+      .dim-bottom::before { left: 0; }
+      .dim-bottom::after { right: 0; }
+      .dim-bottom .dim-label {
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--paper);
+        padding: 0 6px;
+      }
+
+      /* ── DIMENSION-LINE LABEL (used for section captions) ───── */
+      .dim-label-block {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .dim-tick {
+        flex: 1;
+        height: 1px;
+        background: var(--rule);
+        max-width: 32px;
+      }
+
+      /* ── HAND-LETTERED NOTE ──────────────────────────────────── */
+      .hand-note {
+        margin-top: 12px;
+        font-family: 'Architects Daughter', cursive;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--ink);
+        opacity: 0.82;
+      }
+
+      /* ── TITLE BLOCK (bottom right of hero, gridded) ──────────── */
+      .title-block {
+        margin-top: 32px;
+        margin-left: auto;
+        width: 100%;
+        max-width: 520px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        border: 1.5px solid var(--ink);
+        background: var(--paper);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+      }
+      .tb-cell {
+        padding: 8px 10px;
+        border-top: 1px solid var(--ink);
+        border-left: 1px solid var(--ink);
+      }
+      .tb-cell:nth-child(-n+3) { border-top: none; }
+      .tb-cell:first-child,
+      .tb-cell:nth-child(4) { border-left: none; }
+      .tb-wide { grid-column: span 1; }
+      .tb-key {
+        font-size: 0.55rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .tb-val {
+        font-size: 0.8rem;
+        color: var(--ink);
+        letter-spacing: 0.03em;
+      }
+      .tb-sheet { background: rgba(200,168,120,0.08); }
+      .tb-sheet-num {
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+      }
+
+      /* ── SCALE BAR ───────────────────────────────────────────── */
+      .scale-bar {
+        margin-top: 18px;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.6rem;
+        color: var(--oak-dark);
+        letter-spacing: 0.15em;
+      }
+      .scale-graphic {
+        display: inline-flex;
+        height: 6px;
+        border: 1px solid var(--ink);
+        width: 160px;
+      }
+      .scale-graphic span {
+        flex: 1;
+        border-right: 1px solid var(--ink);
+      }
+      .scale-graphic span:nth-child(odd) { background: var(--ink); }
+      .scale-graphic span:last-child { border-right: none; }
+      .scale-label {
+        margin-top: 4px;
+        max-width: 170px;
+      }
+
+      /* ── MATCH LINE (between sheets) ─────────────────────────── */
+      .match-line {
+        position: relative;
+        margin: 0 0;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 1px dashed var(--ink);
+      }
+      .match-tag {
+        background: var(--paper);
+        padding: 2px 12px;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        color: var(--ink);
+        position: absolute;
+        top: -8px;
+      }
+
+      /* ── REVISION CLOUD around the email ─────────────────────── */
+      .rev-wrap {
+        display: inline-block;
+        position: relative;
+        padding: 10px 28px 10px 14px;
+      }
+      .rev-wrap::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1.5px solid var(--oak-dark);
+        border-radius: 18px;
+        /* simulate revision cloud scallops using mask-style border-radius */
+        background-image: radial-gradient(circle at 0 0, transparent 6px, transparent 6.5px);
+        opacity: 0.55;
+        pointer-events: none;
+      }
+      .rev-cloud-num {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 22px;
+        height: 22px;
+        background: var(--paper);
+        border: 1px solid var(--oak-dark);
+        color: var(--oak-dark);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        padding-top: 6px;
+      }
+
+      /* ── END OF SET footer ───────────────────────────────────── */
+      .end-of-set {
+        margin-top: 80px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        color: var(--ink);
+      }
+      .eos-rule { flex: 1; height: 1px; background: var(--ink); }
+      .copy-line {
+        margin-top: 14px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      /* ── REVEAL ANIMATION ────────────────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 900ms ease-out, transform 900ms ease-out;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      html { scroll-behavior: smooth; }
+
+      /* Tighten things on phones where the title block + dimensions
+         get cramped */
+      @media (max-width: 640px) {
+        .drawing-sheet { margin: 8px; }
+        .crop-tl { top: -18px; left: -18px; }
+        .crop-tr { top: -18px; right: -18px; }
+        .crop-bl { bottom: -18px; left: -18px; }
+        .crop-br { bottom: -18px; right: -18px; }
+        .title-block { grid-template-columns: 1fr 1fr; }
+        .tb-cell:nth-child(-n+3) { border-top: 1px solid var(--ink); }
+        .tb-cell:nth-child(1) { border-top: none; }
+        .tb-cell:nth-child(2) { border-top: none; }
+        .dim-wrap { padding: 18px 24px 24px 0; }
+      }
+    </style>
+
+    <script>
+      const sections = document.querySelectorAll<HTMLElement>('.reveal');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      sections.forEach((section) => observer.observe(section));
+    </script>
+  </body>
+</html>

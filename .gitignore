@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# Astro generated files
+.astro/
+
+# environment variables
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# editor folders
+.vscode/
+.idea/
